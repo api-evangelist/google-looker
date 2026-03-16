@@ -1,10 +1,12 @@
+aid: google-looker
 name: Google Looker APIs
 description: A collection of APIs for Google Looker, a modern business intelligence and analytics platform
 image: https://cloud.google.com/images/social-icon-google-cloud-1200-630.png
-created: '2024'
-modified: '2026-03-03'
-specificationVersion: '0.18'
-url: https://example.com/apis/google-looker/apis.yaml
+url: https://cloud.google.com/looker
+created: '2024-01-01'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+type: Index
 apis:
 - name: Looker API
   description: The Looker API provides programmatic access to Looker functionality for managing users, content, queries, and more
@@ -69,9 +71,8 @@ apis:
   - type: Documentation
     url: https://developers.google.com/looker-studio/integrate/api/reference
 maintainers:
-- name: Kin Lane
+- FN: Kin Lane
   email: kin@apievangelist.com
-  url: https://apievangelist.com
 common:
 - type: Portal
   url: https://cloud.google.com/looker
