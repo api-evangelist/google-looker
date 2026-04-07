@@ -26,8 +26,7 @@ apis:
       - type: Documentation
         url: https://cloud.google.com/looker/docs/reference/looker-api/latest
       - type: OpenAPI
-        url: 
-          https://raw.githubusercontent.com/looker-open-source/sdk-codegen/main/spec/Looker.4.0.oas.json
+        url: https://raw.githubusercontent.com/looker-open-source/sdk-codegen/main/spec/Looker.4.0.oas.json
       - type: Authentication
         url: https://cloud.google.com/looker/docs/api-auth
       - type: SDK
@@ -71,10 +70,10 @@ apis:
     baseURL: https://datastudio.googleapis.com/v1
     tags:
       - Analytics
+      - Assets
       - Business Intelligence
       - Data Visualization
       - Reporting
-      - Assets
     properties:
       - type: Documentation
         url: https://developers.google.com/looker-studio/integrate/api
