@@ -1,0 +1,206 @@
+openapi: 3.1.0
+info:
+  title: Google Looker API
+  description: >-
+    A simplified OpenAPI representation for Google Looker covering core Looker
+    API 4.0 endpoints used to authenticate, fetch users, and run looks. This
+    spec is a curated index entry pointing to the upstream Looker OpenAPI for
+    full coverage.
+  version: 4.0.0
+  contact:
+    name: Google Looker
+    url: https://cloud.google.com/looker/docs/api-overview
+servers:
+  - url: https://your-instance.cloud.looker.com:19999/api/4.0
+    description: Looker instance API endpoint (replace your-instance).
+paths:
+  /login:
+    post:
+      operationId: login
+      summary: Login
+      description: >-
+        Exchange Looker API client_id and client_secret for an OAuth-style
+        access token used to authorize subsequent API requests.
+      tags:
+        - Authentication
+      parameters:
+        - name: client_id
+          in: query
+          required: true
+          description: Looker API client ID for the user account being authenticated.
+          schema:
+            type: string
+        - name: client_secret
+          in: query
+          required: true
+          description: Looker API client secret paired with the client_id.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful login response containing the access token.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessToken'
+  /user:
+    get:
+      operationId: getCurrentUser
+      summary: Get Current User
+      description: >-
+        Return the user record associated with the access token used for the
+        request, including identifiers, profile fields, and role membership.
+      tags:
+        - Users
+      responses:
+        '200':
+          description: Successful response containing the current Looker user record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users:
+    get:
+      operationId: getAllUsers
+      summary: Get All Users
+      description: >-
+        Return a paginated list of all Looker user records visible to the
+        authenticated caller. Use page and per_page to traverse results.
+      tags:
+        - Users
+      parameters:
+        - name: page
+          in: query
+          description: Page number to retrieve when paginating user results.
+          schema:
+            type: integer
+        - name: per_page
+          in: query
+          description: Number of user records to return per page.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response containing a list of Looker user records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+  /looks:
+    get:
+      operationId: getAllLooks
+      summary: Get All Looks
+      description: >-
+        Return a list of saved Looker Looks (saved query visualizations) that
+        the authenticated user has permission to view.
+      tags:
+        - Looks
+      responses:
+        '200':
+          description: Successful response containing a list of saved Looks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Look'
+  /looks/{look_id}/run/{result_format}:
+    get:
+      operationId: runLook
+      summary: Run Look
+      description: >-
+        Execute a saved Look and return its query results in the requested
+        output format such as json, csv, or html.
+      tags:
+        - Looks
+      parameters:
+        - name: look_id
+          in: path
+          required: true
+          description: Numeric identifier of the Look to execute.
+          schema:
+            type: string
+        - name: result_format
+          in: path
+          required: true
+          description: Output format for the executed Look results.
+          schema:
+            type: string
+            enum: [json, json_detail, csv, html, md, xlsx, sql, png, jpg]
+      responses:
+        '200':
+          description: Successful response containing the rendered Look results.
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    AccessToken:
+      type: object
+      description: OAuth-style access token returned by the Looker login endpoint.
+      properties:
+        access_token:
+          type: string
+          description: Bearer token used to authorize subsequent Looker API requests.
+        token_type:
+          type: string
+          description: Type of token issued, typically Bearer.
+        expires_in:
+          type: integer
+          description: Lifetime of the access token in seconds.
+    User:
+      type: object
+      description: A Looker user account record.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the user.
+        first_name:
+          type: string
+          description: User first name.
+        last_name:
+          type: string
+          description: User last name.
+        email:
+          type: string
+          description: Primary email address for the user.
+        is_disabled:
+          type: boolean
+          description: Indicates whether the user account is disabled.
+        role_ids:
+          type: array
+          description: List of role identifiers assigned to the user.
+          items:
+            type: string
+    Look:
+      type: object
+      description: A saved Looker Look (visualized query).
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the Look.
+        title:
+          type: string
+          description: Display title of the Look.
+        description:
+          type: string
+          description: Author-provided description of the Look.
+        public:
+          type: boolean
+          description: Indicates whether the Look is publicly accessible.
+        query_id:
+          type: string
+          description: Identifier of the underlying query used to render the Look.
+security:
+  - BearerAuth: []
+tags:
+  - name: Authentication
+  - name: Users
+  - name: Looks

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/google-looker/json-schema/Look.json",
+  "title": "Look",
+  "description": "A saved Looker Look (visualized query) that can be run, embedded, or rendered in a dashboard.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for the Look."
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title of the Look."
+    },
+    "description": {
+      "type": "string",
+      "description": "Author-provided description of the Look."
+    },
+    "public": {
+      "type": "boolean",
+      "description": "Indicates whether the Look is publicly accessible."
+    },
+    "query_id": {
+      "type": "string",
+      "description": "Identifier of the underlying query used to render the Look."
+    },
+    "user_id": {
+      "type": "string",
+      "description": "Identifier of the Looker user that owns the Look."
+    },
+    "folder_id": {
+      "type": "string",
+      "description": "Identifier of the folder where the Look is stored."
+    }
+  },
+  "required": ["id", "title"]
+}

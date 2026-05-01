@@ -1,0 +1,22 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "looker": "https://cloud.google.com/looker/docs/reference/looker-api/latest/",
+    "User": "schema:Person",
+    "Look": "schema:CreativeWork",
+    "Dashboard": "schema:CreativeWork",
+    "Query": "schema:Action",
+    "id": "schema:identifier",
+    "name": "schema:name",
+    "title": "schema:name",
+    "description": "schema:description",
+    "first_name": "schema:givenName",
+    "last_name": "schema:familyName",
+    "email": "schema:email",
+    "url": "schema:url",
+    "is_disabled": "looker:isDisabled",
+    "role_ids": "looker:roleIds",
+    "query_id": "looker:queryId",
+    "public": "looker:public"
+  }
+}

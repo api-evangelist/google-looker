@@ -6,7 +6,7 @@ description: >-
 image: https://cloud.google.com/images/social-icon-google-cloud-1200-630.png
 url: https://cloud.google.com/looker
 created: '2024-01-01'
-modified: '2026-03-16'
+modified: '2026-04-28'
 specificationVersion: '0.19'
 type: Index
 apis:
