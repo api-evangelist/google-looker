@@ -4,160 +4,291 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Google Looker
 providerId: google-looker
 created: '2026-05-04'
-modified: '2026-05-04'
-tags: []
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+modified: '2026-05-05'
+reconciled: true
+tags:
+  - Business Intelligence
+  - Analytics
+  - Google Cloud
+  - Embedded Analytics
+description: Google Looker (Google Cloud core) is sold in three platform editions — Standard, Enterprise,
+  and Embed — each with annual-commitment contact-sales pricing covering one production instance, base
+  Standard and Developer user counts, and a tier-specific monthly query/admin API call quota. Per-user
+  prices are not publicly listed. Conversational Analytics consumption is metered in Data Tokens with
+  per-1M overage rates effective October 2026; access is unlimited within fair-use through Sept 30, 2026.
+sources:
+  - https://cloud.google.com/looker/pricing
 plans:
-  - id: google-looker-free
-    name: Free
-    type: freemium
-    description: Free entry tier for the Google Looker API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+  - id: google-looker-standard
+    name: Standard
+    type: subscription
+    description: Standard edition for small organizations / teams under 50 users. Annual commitment;
+      contact sales for pricing.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
+      - label: Production instance
+        name: instance
+        type: subscription
+        metric: instance
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+      - label: Standard users included
+        name: standard_users
         type: quota
-        metric: requests
+        metric: seat
+        limit: 10
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: true
+      - label: Developer users included
+        name: developer_users
+        type: quota
+        metric: seat
+        limit: 2
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: true
+      - label: Query-based API calls
+        name: query_api_calls
+        type: quota
+        metric: request
         limit: 1000
         timeFrame: month
         geo: global
-        domains:
-          - https://your-instance.cloud.looker.com:19999/api/4.0
-          - https://looker.googleapis.com
-          - https://datastudio.googleapis.com/v1
         unit: 1
         price: '0.00'
         userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
+      - label: Admin API calls
+        name: admin_api_calls
+        type: quota
+        metric: request
+        limit: 1000
+        timeFrame: month
         geo: global
-        domains:
-          - https://your-instance.cloud.looker.com:19999/api/4.0
-          - https://looker.googleapis.com
-          - https://datastudio.googleapis.com/v1
         unit: 1
         price: '0.00'
         userMultiplied: false
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
       - name: Looker API
       - name: Looker (Google Cloud core) API
-      - name: Looker Studio API
-  - id: google-looker-pro
-    name: Professional
-    type: paid
-    description: Production tier for Google Looker. Provides higher quotas, priority support, and access
-      to the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+      - name: LookML modeling
+  - id: google-looker-enterprise
+    name: Enterprise
+    type: subscription
+    description: Enterprise edition for internal BI/analytics with enhanced security. Annual commitment;
+      contact sales.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
+      - label: Production instance
+        name: instance
+        type: subscription
+        metric: instance
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+      - label: Standard users included
+        name: standard_users
         type: quota
-        metric: requests
+        metric: seat
+        limit: 10
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: true
+      - label: Developer users included
+        name: developer_users
+        type: quota
+        metric: seat
+        limit: 2
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: true
+      - label: Query-based API calls
+        name: query_api_calls
+        type: quota
+        metric: request
         limit: 100000
         timeFrame: month
         geo: global
-        domains:
-          - https://your-instance.cloud.looker.com:19999/api/4.0
-          - https://looker.googleapis.com
-          - https://datastudio.googleapis.com/v1
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains:
-          - https://your-instance.cloud.looker.com:19999/api/4.0
-          - https://looker.googleapis.com
-          - https://datastudio.googleapis.com/v1
         unit: 1
         price: '0.00'
         userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
+      - label: Admin API calls
+        name: admin_api_calls
+        type: quota
+        metric: request
+        limit: 10000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Enhanced security controls
+      - name: Looker API
+      - name: Looker (Google Cloud core) API
+      - name: LookML modeling
+  - id: google-looker-embed
+    name: Embed
+    type: subscription
+    description: Embed edition for external/customer-facing analytics at scale. Annual commitment;
+      contact sales.
+    entries:
+      - label: Production instance
+        name: instance
+        type: subscription
+        metric: instance
+        limit: 1
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+      - label: Standard users included
+        name: standard_users
+        type: quota
+        metric: seat
+        limit: 10
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: true
+      - label: Developer users included
+        name: developer_users
+        type: quota
+        metric: seat
+        limit: 2
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: true
+      - label: Query-based API calls
+        name: query_api_calls
+        type: quota
+        metric: request
+        limit: 500000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Admin API calls
+        name: admin_api_calls
+        type: quota
+        metric: request
+        limit: 100000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: External-facing embed entitlement
+      - name: Looker API
+      - name: LookML modeling
+  - id: google-looker-conversational-analytics
+    name: Conversational Analytics
+    type: usage-based
+    description: AI-driven analytics metered in Data Tokens (input + output). Bundled monthly token
+      allocations per user type; overage prices effective October 1, 2026.
+    entries:
+      - label: Viewer monthly input tokens (included)
+        name: viewer_input_tokens
+        type: quota
+        metric: token
+        limit: 1000000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: true
+      - label: Viewer monthly output tokens (included)
+        name: viewer_output_tokens
+        type: quota
+        metric: token
+        limit: 20000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: true
+      - label: Standard user monthly input tokens (included)
+        name: standard_input_tokens
+        type: quota
+        metric: token
+        limit: 2000000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: true
+      - label: Standard user monthly output tokens (included)
+        name: standard_output_tokens
+        type: quota
+        metric: token
+        limit: 40000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: true
+      - label: Developer monthly input tokens (included)
+        name: developer_input_tokens
+        type: quota
+        metric: token
+        limit: 4000000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: true
+      - label: Developer monthly output tokens (included)
+        name: developer_output_tokens
+        type: quota
+        metric: token
+        limit: 80000
+        timeFrame: month
+        geo: global
+        unit: 1
+        price: '0.00'
+        userMultiplied: true
+      - label: Input data tokens overage
+        name: input_overage
         type: metered
-        metric: requests
+        metric: token
         limit: -1
         timeFrame: month
         geo: global
-        domains:
-          - https://your-instance.cloud.looker.com:19999/api/4.0
-          - https://looker.googleapis.com
-          - https://datastudio.googleapis.com/v1
-        unit: 1000
-        price: TBD
+        unit: 1000000
+        price: '3.00'
         userMultiplied: false
-    elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: Looker API
-      - name: Looker (Google Cloud core) API
-      - name: Looker Studio API
-  - id: google-looker-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for Google Looker. Includes dedicated capacity, contractual SLAs,
-      security review, data residency options, and named technical account management.
-    entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
+      - label: Output data tokens overage
+        name: output_overage
+        type: metered
+        metric: token
         limit: -1
         timeFrame: month
-        geo: configurable
-        domains:
-          - https://your-instance.cloud.looker.com:19999/api/4.0
-          - https://looker.googleapis.com
-          - https://datastudio.googleapis.com/v1
-        unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains:
-          - https://your-instance.cloud.looker.com:19999/api/4.0
-          - https://looker.googleapis.com
-          - https://datastudio.googleapis.com/v1
-        unit: 1
-        price: custom
+        geo: global
+        unit: 1000000
+        price: '20.00'
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Looker API
-      - name: Looker (Google Cloud core) API
-      - name: Looker Studio API
+      - name: Conversational Analytics in Looker
+      - name: Unlimited within fair-use through Sept 30, 2026
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

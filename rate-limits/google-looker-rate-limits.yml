@@ -4,91 +4,72 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Google Looker
 providerId: google-looker
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Google Looker API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  - Business Intelligence
+  - Analytics
+  - Google Cloud
+description: Google Looker (Google Cloud core) enforces request limits as monthly API-call quotas tied to
+  the platform edition rather than per-second throttling. Standard, Enterprise, and Embed editions provide
+  different monthly allowances for query-based and admin API calls. Per-instance request limits are also
+  governed by the size and concurrency settings of the Looker instance itself.
+sources:
+  - https://cloud.google.com/looker/pricing
+  - https://cloud.google.com/looker/docs/api-rate-limiting
 responseCodes:
   throttled: 429
   quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Looker API
-      - Looker (Google Cloud core) API
-      - Looker Studio API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
+  - name: Query-based API calls (Standard edition)
+    scope: instance
     metric: requests_per_month
     limit: 1000
     timeFrame: month
-    applies:
-      - Looker API
-      - Looker (Google Cloud core) API
-      - Looker Studio API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Looker API
-      - Looker (Google Cloud core) API
-      - Looker Studio API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
+    notes: Aggregated across all query-based endpoints. Overage requires upgrade to higher edition.
+  - name: Admin API calls (Standard edition)
+    scope: instance
+    metric: requests_per_month
+    limit: 1000
+    timeFrame: month
+  - name: Query-based API calls (Enterprise edition)
+    scope: instance
     metric: requests_per_month
     limit: 100000
     timeFrame: month
-    applies:
-      - Looker API
-      - Looker (Google Cloud core) API
-      - Looker Studio API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Looker API
-      - Looker (Google Cloud core) API
-      - Looker Studio API
+  - name: Admin API calls (Enterprise edition)
+    scope: instance
+    metric: requests_per_month
+    limit: 10000
+    timeFrame: month
+  - name: Query-based API calls (Embed edition)
+    scope: instance
+    metric: requests_per_month
+    limit: 500000
+    timeFrame: month
+  - name: Admin API calls (Embed edition)
+    scope: instance
+    metric: requests_per_month
+    limit: 100000
+    timeFrame: month
+  - name: Per-instance concurrency
+    scope: instance
+    metric: varies
+    limit: 'see service-specific quotas page'
+    notes: Concurrent query and request capacity is determined by Looker instance sizing; contact support
+      for higher concurrency.
 policies:
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: Implement exponential backoff with jitter when receiving 429 or 503; respect Retry-After
+      where present.
+  - name: Quota tied to edition
+    description: Monthly API quotas reset on a calendar basis and are determined by the Looker platform
+      edition; upgrades raise the cap.
+  - name: Long-running queries
+    description: Use async query endpoints for queries that may exceed default request timeouts; poll for
+      completion rather than blocking the request thread.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

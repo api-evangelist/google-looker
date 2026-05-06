@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,140 +9,106 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Google Looker
 providerId: google-looker
-publisherName: Google Looker
-serviceCategory: API
+publisherName: Google LLC
+serviceCategory: Analytics
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Google Looker API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+  - Business Intelligence
+  - Analytics
+  - Google Cloud
+description: 'FOCUS-aligned FinOps for Google Looker (Google Cloud core): edition-based subscription with
+  bundled instance, seat, and API-call entitlements, plus token-metered Conversational Analytics overages
+  starting October 2026.'
+sources:
+  - https://cloud.google.com/looker/pricing
+  - https://cloud.google.com/billing/docs
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Tiered Subscription
+  billingFrequency: Annual
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
+    - Usage
     - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
+    - Credit
 focusColumns:
   ServiceName: Google Looker
-  ServiceCategory: Developer Tools / API
-  ProviderName: Google Looker
-  PublisherName: Google Looker
-  InvoiceIssuerName: Google Looker
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceCategory: Analytics
+  ProviderName: Google
+  PublisherName: Google LLC
+  InvoiceIssuerName: Google LLC
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-  - name: api_requests
-    description: Count of billable API requests
+  - name: looker_instance
+    description: Production Looker instance hours billed per edition
+    unit: instance-month
+    aggregation: sum
+    dimensions:
+      - edition
+      - region
+  - name: standard_users
+    description: Standard user seats consumed
+    unit: seat
+    aggregation: max
+    dimensions:
+      - edition
+  - name: developer_users
+    description: Developer user seats consumed
+    unit: seat
+    aggregation: max
+    dimensions:
+      - edition
+  - name: viewer_users
+    description: Viewer user seats consumed
+    unit: seat
+    aggregation: max
+    dimensions:
+      - edition
+  - name: query_api_calls
+    description: Query-based API calls against the Looker instance
     unit: request
     aggregation: sum
     dimensions:
-      - api
+      - edition
       - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+  - name: admin_api_calls
+    description: Admin API calls against the Looker instance
+    unit: request
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
+      - edition
+      - endpoint
+  - name: conversational_input_tokens
+    description: Input data tokens consumed by Conversational Analytics
+    unit: token
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Looker API
-    baseURL: https://your-instance.cloud.looker.com:19999/api/4.0
-    tags:
-      - Analytics
-      - Business Intelligence
-      - Data Visualization
-      - Reporting
-    serviceName: Looker API
-    serviceCategory: API
-  - name: Looker (Google Cloud core) API
-    baseURL: https://looker.googleapis.com
-    tags:
-      - Analytics
-      - Business Intelligence
-      - Cloud Management
-      - Instance Management
-    serviceName: Looker (Google Cloud core) API
-    serviceCategory: API
-  - name: Looker Studio API
-    baseURL: https://datastudio.googleapis.com/v1
-    tags:
-      - Analytics
-      - Assets
-      - Business Intelligence
-      - Data Visualization
-      - Reporting
-    serviceName: Looker Studio API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - user_type
+  - name: conversational_output_tokens
+    description: Output data tokens produced by Conversational Analytics
+    unit: token
+    aggregation: sum
+    dimensions:
+      - user_type
+principles:
+  - name: Visibility
+    description: Use Cloud Billing exports to BigQuery and the Looker admin usage panel to monitor seat,
+      API, and Conversational Analytics token consumption.
+  - name: Allocation
+    description: Map Looker user groups and Cloud projects to consuming teams; tag projects so billed
+      Looker SKUs roll up correctly to chargeback owners.
+  - name: Optimization
+    description: Right-size the Looker edition to API-call profile; cap viewer Data Token spend with
+      governance; consolidate dev/test instances; review LookML for expensive queries.
+  - name: Accountability
+    description: Set Cloud Billing budgets and anomaly alerts on Looker SKUs; review monthly seat and
+      token utilization vs. forecast with BI owners.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
