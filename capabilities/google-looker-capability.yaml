@@ -1,0 +1,260 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Looker API
+  description: A simplified OpenAPI representation for Google Looker covering core Looker API 4.0 endpoints used to authenticate,
+    fetch users, and run looks. This spec is a curated index entry pointing to the upstream Looker OpenAPI for full coverage.
+  tags:
+  - Google
+  - Looker
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: google-looker
+    baseUri: https://your-instance.cloud.looker.com:19999/api/4.0
+    description: Google Looker API HTTP API.
+    authentication:
+      type: bearer
+      token: '{{GOOGLE_LOOKER_TOKEN}}'
+    resources:
+    - name: login
+      path: /login
+      operations:
+      - name: login
+        method: POST
+        description: Login
+        inputParameters:
+        - name: client_id
+          in: query
+          type: string
+          required: true
+          description: Looker API client ID for the user account being authenticated.
+        - name: client_secret
+          in: query
+          type: string
+          required: true
+          description: Looker API client secret paired with the client_id.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: user
+      path: /user
+      operations:
+      - name: getcurrentuser
+        method: GET
+        description: Get Current User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: users
+      path: /users
+      operations:
+      - name: getallusers
+        method: GET
+        description: Get All Users
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Page number to retrieve when paginating user results.
+        - name: per_page
+          in: query
+          type: integer
+          description: Number of user records to return per page.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: looks
+      path: /looks
+      operations:
+      - name: getalllooks
+        method: GET
+        description: Get All Looks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: looks-look-id-run-result-format
+      path: /looks/{look_id}/run/{result_format}
+      operations:
+      - name: runlook
+        method: GET
+        description: Run Look
+        inputParameters:
+        - name: look_id
+          in: path
+          type: string
+          required: true
+          description: Numeric identifier of the Look to execute.
+        - name: result_format
+          in: path
+          type: string
+          required: true
+          description: Output format for the executed Look results.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: google-looker-rest
+    description: REST adapter for Google Looker API.
+    resources:
+    - path: /login
+      name: login
+      operations:
+      - method: POST
+        name: login
+        description: Login
+        call: google-looker.login
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /user
+      name: getcurrentuser
+      operations:
+      - method: GET
+        name: getcurrentuser
+        description: Get Current User
+        call: google-looker.getcurrentuser
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /users
+      name: getallusers
+      operations:
+      - method: GET
+        name: getallusers
+        description: Get All Users
+        call: google-looker.getallusers
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /looks
+      name: getalllooks
+      operations:
+      - method: GET
+        name: getalllooks
+        description: Get All Looks
+        call: google-looker.getalllooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /looks/{look_id}/run/{result_format}
+      name: runlook
+      operations:
+      - method: GET
+        name: runlook
+        description: Run Look
+        call: google-looker.runlook
+        with:
+          look_id: rest.look_id
+          result_format: rest.result_format
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: google-looker-mcp
+    transport: http
+    description: MCP adapter for Google Looker API for AI agent use.
+    tools:
+    - name: login
+      description: Login
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: google-looker.login
+      with:
+        client_id: tools.client_id
+        client_secret: tools.client_secret
+      inputParameters:
+      - name: client_id
+        type: string
+        description: Looker API client ID for the user account being authenticated.
+        required: true
+      - name: client_secret
+        type: string
+        description: Looker API client secret paired with the client_id.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getcurrentuser
+      description: Get Current User
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-looker.getcurrentuser
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getallusers
+      description: Get All Users
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-looker.getallusers
+      with:
+        page: tools.page
+        per_page: tools.per_page
+      inputParameters:
+      - name: page
+        type: integer
+        description: Page number to retrieve when paginating user results.
+      - name: per_page
+        type: integer
+        description: Number of user records to return per page.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getalllooks
+      description: Get All Looks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-looker.getalllooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: runlook
+      description: Run Look
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: google-looker.runlook
+      with:
+        look_id: tools.look_id
+        result_format: tools.result_format
+      inputParameters:
+      - name: look_id
+        type: string
+        description: Numeric identifier of the Look to execute.
+        required: true
+      - name: result_format
+        type: string
+        description: Output format for the executed Look results.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+binds:
+- namespace: env
+  keys:
+    GOOGLE_LOOKER_TOKEN: GOOGLE_LOOKER_TOKEN
