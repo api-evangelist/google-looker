@@ -79,6 +79,8 @@ apis:
         url: https://developers.google.com/looker-studio/integrate/api
       - type: Documentation
         url: https://developers.google.com/looker-studio/integrate/api/reference
+integrations:
+  - name: Become a Partner
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
@@ -101,3 +103,5 @@ common:
     url: https://developers.google.com/looker-studio/connector
   - type: Community Connectors Reference
     url: https://developers.google.com/looker-studio/connector/reference
+  - type: Integrations
+    url: https://cloud.google.com/marketplace
