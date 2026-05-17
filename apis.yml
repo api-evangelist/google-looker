@@ -33,11 +33,11 @@ apis:
         url: https://github.com/looker-open-source/sdk-codegen
       - type: Pricing
         url: https://cloud.google.com/looker/pricing
-      - type: Status
+      - type: StatusPage
         url: https://status.looker.com/
       - type: Support
         url: https://cloud.google.com/looker/docs/support
-      - type: Getting Started
+      - type: GettingStarted
         url: https://cloud.google.com/looker/docs/api-getting-started
       - type: API Explorer
         url: https://cloud.google.com/looker/docs/api-explorer
@@ -87,15 +87,15 @@ maintainers:
 common:
   - type: Portal
     url: https://cloud.google.com/looker
-  - type: Getting Started
+  - type: GettingStarted
     url: https://cloud.google.com/looker/docs/getting-started
   - type: Blog
     url: https://cloud.google.com/blog/products/data-analytics
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://cloud.google.com/terms
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://cloud.google.com/privacy
-  - type: Release Notes
+  - type: ReleaseNotes
     url: https://cloud.google.com/looker/docs/release-notes
   - type: Looker Studio
     url: https://cloud.google.com/looker-studio
