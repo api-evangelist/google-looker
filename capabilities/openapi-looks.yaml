@@ -1,0 +1,119 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Google Looker API — Looks
+  description: 'Google Looker API — Looks. 2 operations. Lead operation: Get All Looks. Self-contained Naftiko capability
+    covering one Google Looker business surface.'
+  tags:
+  - Google Looker
+  - Looks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    GOOGLE_LOOKER_API_KEY: GOOGLE_LOOKER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: openapi-looks
+    baseUri: https://your-instance.cloud.looker.com:19999/api/4.0
+    description: Google Looker API — Looks business capability. Self-contained, no shared references.
+    resources:
+    - name: looks
+      path: /looks
+      operations:
+      - name: getalllooks
+        method: GET
+        description: Get All Looks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: looks-look_id-run-result_format
+      path: /looks/{look_id}/run/{result_format}
+      operations:
+      - name: runlook
+        method: GET
+        description: Run Look
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: look_id
+          in: path
+          type: string
+          description: Numeric identifier of the Look to execute.
+          required: true
+        - name: result_format
+          in: path
+          type: string
+          description: Output format for the executed Look results.
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.GOOGLE_LOOKER_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: openapi-looks-rest
+    port: 8080
+    description: REST adapter for Google Looker API — Looks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/looks
+      name: looks
+      description: REST surface for looks.
+      operations:
+      - method: GET
+        name: getalllooks
+        description: Get All Looks
+        call: openapi-looks.getalllooks
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/looks/{look-id}/run/{result-format}
+      name: looks-look-id-run-result-format
+      description: REST surface for looks-look_id-run-result_format.
+      operations:
+      - method: GET
+        name: runlook
+        description: Run Look
+        call: openapi-looks.runlook
+        with:
+          look_id: rest.look_id
+          result_format: rest.result_format
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: openapi-looks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Google Looker API — Looks. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-all-looks
+      description: Get All Looks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: openapi-looks.getalllooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: run-look
+      description: Run Look
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: openapi-looks.runlook
+      with:
+        look_id: tools.look_id
+        result_format: tools.result_format
+      outputParameters:
+      - type: object
+        mapping: $.
