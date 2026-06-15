@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Looker API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-instance.cloud.looker.com:19999/api/4.0/login",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Looker API client ID for the user account being authenticated."
+              },
+              {
+                "name": "client_secret",
+                "value": "",
+                "type": "query",
+                "description": "Looker API client secret paired with the client_id."
+              }
+            ]
+          },
+          "docs": "Exchange Looker API client_id and client_secret for an OAuth-style access token used to authorize subsequent API requests."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Current User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-instance.cloud.looker.com:19999/api/4.0/user"
+          },
+          "docs": "Return the user record associated with the access token used for the request, including identifiers, profile fields, and role membership."
+        },
+        {
+          "info": {
+            "name": "Get All Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-instance.cloud.looker.com:19999/api/4.0/users",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve when paginating user results."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of user records to return per page."
+              }
+            ]
+          },
+          "docs": "Return a paginated list of all Looker user records visible to the authenticated caller. Use page and per_page to traverse results."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Looks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Looks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-instance.cloud.looker.com:19999/api/4.0/looks"
+          },
+          "docs": "Return a list of saved Looker Looks (saved query visualizations) that the authenticated user has permission to view."
+        },
+        {
+          "info": {
+            "name": "Run Look",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-instance.cloud.looker.com:19999/api/4.0/looks/:look_id/run/:result_format",
+            "params": [
+              {
+                "name": "look_id",
+                "value": "",
+                "type": "path",
+                "description": "Numeric identifier of the Look to execute."
+              },
+              {
+                "name": "result_format",
+                "value": "",
+                "type": "path",
+                "description": "Output format for the executed Look results."
+              }
+            ]
+          },
+          "docs": "Execute a saved Look and return its query results in the requested output format such as json, csv, or html."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
