@@ -82,6 +82,12 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: VulnerabilityDisclosure
+    url: security/google-looker-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/google-looker-domain-security.yml
+  - type: Authentication
+    url: authentication/google-looker-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/looker
   - type: Portal
