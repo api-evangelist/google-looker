@@ -1,0 +1,87 @@
+openapi: 3.1.0
+info:
+  title: Google Looker Authentication Users API
+  description: A simplified OpenAPI representation for Google Looker covering core Looker API 4.0 endpoints used to authenticate, fetch users, and run looks. This spec is a curated index entry pointing to the upstream Looker OpenAPI for full coverage.
+  version: 4.0.0
+  contact:
+    name: Google Looker
+    url: https://cloud.google.com/looker/docs/api-overview
+servers:
+- url: https://your-instance.cloud.looker.com:19999/api/4.0
+  description: Looker instance API endpoint (replace your-instance).
+security:
+- BearerAuth: []
+tags:
+- name: Users
+paths:
+  /user:
+    get:
+      operationId: getCurrentUser
+      summary: Get Current User
+      description: Return the user record associated with the access token used for the request, including identifiers, profile fields, and role membership.
+      tags:
+      - Users
+      responses:
+        '200':
+          description: Successful response containing the current Looker user record.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+  /users:
+    get:
+      operationId: getAllUsers
+      summary: Get All Users
+      description: Return a paginated list of all Looker user records visible to the authenticated caller. Use page and per_page to traverse results.
+      tags:
+      - Users
+      parameters:
+      - name: page
+        in: query
+        description: Page number to retrieve when paginating user results.
+        schema:
+          type: integer
+      - name: per_page
+        in: query
+        description: Number of user records to return per page.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful response containing a list of Looker user records.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+components:
+  schemas:
+    User:
+      type: object
+      description: A Looker user account record.
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the user.
+        first_name:
+          type: string
+          description: User first name.
+        last_name:
+          type: string
+          description: User last name.
+        email:
+          type: string
+          description: Primary email address for the user.
+        is_disabled:
+          type: boolean
+          description: Indicates whether the user account is disabled.
+        role_ids:
+          type: array
+          description: List of role identifiers assigned to the user.
+          items:
+            type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
