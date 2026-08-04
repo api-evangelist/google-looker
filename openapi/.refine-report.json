@@ -1,0 +1,18 @@
+{
+  "provider": "google-looker",
+  "sources": [
+    "google-looker-authentication-api-openapi.yml",
+    "google-looker-looks-api-openapi.yml",
+    "google-looker-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "google-looker-authentication-api-openapi.yml",
+    "google-looker-looks-api-openapi.yml",
+    "google-looker-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
