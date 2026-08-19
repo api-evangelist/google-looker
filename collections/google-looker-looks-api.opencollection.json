@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Looker Authentication Looks API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Looks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Looks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-instance.cloud.looker.com:19999/api/4.0/looks"
+          },
+          "docs": "Return a list of saved Looker Looks (saved query visualizations) that the authenticated user has permission to view."
+        },
+        {
+          "info": {
+            "name": "Run Look",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-instance.cloud.looker.com:19999/api/4.0/looks/:look_id/run/:result_format",
+            "params": [
+              {
+                "name": "look_id",
+                "value": "",
+                "type": "path",
+                "description": "Numeric identifier of the Look to execute."
+              },
+              {
+                "name": "result_format",
+                "value": "",
+                "type": "path",
+                "description": "Output format for the executed Look results."
+              }
+            ]
+          },
+          "docs": "Execute a saved Look and return its query results in the requested output format such as json, csv, or html."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

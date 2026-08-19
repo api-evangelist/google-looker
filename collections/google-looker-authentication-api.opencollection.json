@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Looker Authentication API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authentication",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Login",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://your-instance.cloud.looker.com:19999/api/4.0/login",
+            "params": [
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Looker API client ID for the user account being authenticated."
+              },
+              {
+                "name": "client_secret",
+                "value": "",
+                "type": "query",
+                "description": "Looker API client secret paired with the client_id."
+              }
+            ]
+          },
+          "docs": "Exchange Looker API client_id and client_secret for an OAuth-style access token used to authorize subsequent API requests."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

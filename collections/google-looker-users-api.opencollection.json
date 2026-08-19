@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Google Looker Authentication Users API",
+    "version": "4.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Current User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-instance.cloud.looker.com:19999/api/4.0/user"
+          },
+          "docs": "Return the user record associated with the access token used for the request, including identifiers, profile fields, and role membership."
+        },
+        {
+          "info": {
+            "name": "Get All Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://your-instance.cloud.looker.com:19999/api/4.0/users",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to retrieve when paginating user results."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Number of user records to return per page."
+              }
+            ]
+          },
+          "docs": "Return a paginated list of all Looker user records visible to the authenticated caller. Use page and per_page to traverse results."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
