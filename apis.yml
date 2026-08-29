@@ -1,6 +1,18 @@
 aid: google-looker
 name: Google Looker
 description: A collection of APIs for Google Looker, a modern business intelligence and analytics platform.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
