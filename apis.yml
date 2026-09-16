@@ -30,14 +30,14 @@ accessModel:
 image: https://cloud.google.com/images/social-icon-google-cloud-1200-630.png
 url: https://cloud.google.com/looker
 created: '2024-01-01'
-modified: '2026-05-19'
+modified: '2026-09-16'
 specificationVersion: '0.23'
 type: Index
 apis:
 - name: Looker Studio API
-  description: >-
-    The Looker Studio API allows you to search for and manage Looker Studio assets programmatically, enabling
-    automation and migration of Looker Studio resources within Google Workspace or Cloud Identity organizations.
+  description: The Looker Studio API allows you to search for and manage Looker Studio assets programmatically,
+    enabling automation and migration of Looker Studio resources within Google Workspace or Cloud Identity
+    organizations.
   image: https://cloud.google.com/images/social-icon-google-cloud-1200-630.png
   humanURL: https://developers.google.com/looker-studio/integrate/api
   baseURL: https://datastudio.googleapis.com/v1
@@ -145,42 +145,47 @@ apis:
   - type: Documentation
     url: https://cloud.google.com/looker/docs/reference/rest
 integrations:
-  - name: Become a Partner
+- name: Become a Partner
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
 common:
-  - type: Website
-    url: https://www.google.com/
-  - type: AgenticAccess
-    url: agentic-access/google-looker-agentic-access.yml
-  - type: VulnerabilityDisclosure
-    url: security/google-looker-vulnerability-disclosure.yml
-  - type: DomainSecurity
-    url: security/google-looker-domain-security.yml
-  - type: Authentication
-    url: authentication/google-looker-authentication.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/looker
-  - type: Portal
-    url: https://cloud.google.com/looker
-  - type: GettingStarted
-    url: https://cloud.google.com/looker/docs/getting-started
-  - type: Blog
-    url: https://cloud.google.com/blog/products/data-analytics
-  - type: TermsOfService
-    url: https://cloud.google.com/terms
-  - type: PrivacyPolicy
-    url: https://cloud.google.com/privacy
-  - type: ReleaseNotes
-    url: https://cloud.google.com/looker/docs/release-notes
-  - type: Looker Studio
-    url: https://cloud.google.com/looker-studio
-  - type: Community Connectors
-    url: https://developers.google.com/looker-studio/connector
-  - type: Community Connectors Reference
-    url: https://developers.google.com/looker-studio/connector/reference
-  - type: Integrations
-    url: https://cloud.google.com/marketplace
+- type: Website
+  url: https://www.google.com/
+- type: AgenticAccess
+  url: agentic-access/google-looker-agentic-access.yml
+- type: VulnerabilityDisclosure
+  url: security/google-looker-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/google-looker-domain-security.yml
+- type: Authentication
+  url: authentication/google-looker-authentication.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/looker
+- type: Portal
+  url: https://cloud.google.com/looker
+- type: GettingStarted
+  url: https://cloud.google.com/looker/docs/getting-started
+- type: Blog
+  url: https://cloud.google.com/blog/products/data-analytics
+- type: TermsOfService
+  url: https://cloud.google.com/terms
+- type: PrivacyPolicy
+  url: https://cloud.google.com/privacy
+- type: ReleaseNotes
+  url: https://cloud.google.com/looker/docs/release-notes
+- type: Looker Studio
+  url: https://cloud.google.com/looker-studio
+- type: Community Connectors
+  url: https://developers.google.com/looker-studio/connector
+- type: Community Connectors Reference
+  url: https://developers.google.com/looker-studio/connector/reference
+- type: Integrations
+  url: https://cloud.google.com/marketplace
 x-parent: google
 x-relationship: product
+tags:
+- Analytics
+- Business Intelligence
+- Data Visualization
+- Reporting
