@@ -1,9 +1,7 @@
 {
   "provider": "google-looker",
   "sources": [
-    "google-looker-authentication-api-openapi.yml",
-    "google-looker-looks-api-openapi.yml",
-    "google-looker-users-api-openapi.yml"
+    "_original/openapi.yml"
   ],
   "outputs": [
     "google-looker-authentication-api-openapi.yml",
@@ -14,10 +12,13 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "google-looker-authentication-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "google-looker-looks-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "google-looker-users-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "google-looker-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-looker-looks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "google-looker-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

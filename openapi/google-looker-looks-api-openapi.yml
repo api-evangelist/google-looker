@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Google Looker Authentication Looks API
+  title: Google Looker Looks API
   description: A simplified OpenAPI representation for Google Looker covering core Looker API 4.0 endpoints used to authenticate, fetch users, and run looks. This spec is a curated index entry pointing to the upstream Looker OpenAPI for full coverage.
   version: 4.0.0
   contact:
