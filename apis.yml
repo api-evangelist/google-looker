@@ -150,6 +150,9 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: CapabilityMap
+  url: capabilities/google-looker-capability-edges.yml
+  name: Google Looker Business Capability Map
 - type: Website
   url: https://www.google.com/
 - type: AgenticAccess
