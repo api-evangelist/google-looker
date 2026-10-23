@@ -150,6 +150,8 @@ maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/google-looker/overview
 - type: Plans
   url: plans/google-looker-plans-pricing.yml
 - type: RateLimits
