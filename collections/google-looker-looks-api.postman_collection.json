@@ -1,215 +1,224 @@
 {
+  "info": {
+    "_postman_id": "88330a15-3fbb-43fe-a301-59a999dfe983",
+    "name": "Google Looker Looks API",
+    "description": "A simplified OpenAPI representation for Google Looker covering core Looker API 4.0 endpoints used to authenticate, fetch users, and run looks. This spec is a curated index entry pointing to the upstream Looker OpenAPI for full coverage.\n\nContact Support:\n Name: Google Looker",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:54:27.000Z",
+    "updatedAt": "2026-10-22T02:54:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-88330a15-3fbb-43fe-a301-59a999dfe983"
+  },
   "item": [
     {
-      "id": "d13f3d8c-0f75-4bd4-95ac-a21930f64d99",
-      "name": "Looks",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "looks",
       "item": [
         {
-          "id": "f2f7446f-9844-4538-bfaa-cdb1c1f36c84",
-          "name": "Get All Looks",
-          "request": {
-            "name": "Get All Looks",
-            "description": {
-              "content": "Return a list of saved Looker Looks (saved query visualizations) that the authenticated user has permission to view.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "looks"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{look_id}",
+          "item": [
             {
-              "id": "412f6605-bb5e-419c-ac25-b12f6788cddc",
-              "name": "Successful response containing a list of saved Looks.",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "looks"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "run",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{result_format}",
+                  "item": [
+                    {
+                      "name": "Run Look",
+                      "id": "729bf2af-6fa4-47c0-b937-20f35dc88db4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/looks/:look_id/run/:result_format",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "looks",
+                            ":look_id",
+                            "run",
+                            ":result_format"
+                          ],
+                          "variable": [
+                            {
+                              "id": "3c5570dc-d6b8-4a61-b6b9-a1324b2e9544",
+                              "key": "look_id",
+                              "value": "<string>",
+                              "description": "(Required) Numeric identifier of the Look to execute."
+                            },
+                            {
+                              "id": "a1447a0f-9b87-4ebf-be6e-c682e792a2d2",
+                              "key": "result_format",
+                              "value": "json_detail",
+                              "description": "(Required) Output format for the executed Look results."
+                            }
+                          ]
+                        },
+                        "description": "Execute a saved Look and return its query results in the requested output format such as json, csv, or html."
+                      },
+                      "response": [
+                        {
+                          "id": "3b3d1aab-2d47-4076-8818-4d4fa0dc7d64",
+                          "name": "Successful response containing the rendered Look results.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/looks/:look_id/run/:result_format",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "looks",
+                                ":look_id",
+                                "run",
+                                ":result_format"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "look_id"
+                                },
+                                {
+                                  "key": "result_format"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{}",
+                          "createdAt": "2026-10-22T02:54:28.000Z",
+                          "updatedAt": "2026-10-22T02:54:28.000Z",
+                          "uid": "35240-3b3d1aab-2d47-4076-8818-4d4fa0dc7d64"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:54:28.000Z",
+                      "updatedAt": "2026-10-22T02:54:28.000Z",
+                      "uid": "35240-729bf2af-6fa4-47c0-b937-20f35dc88db4"
+                    }
+                  ],
+                  "id": "972c9fd0-b06d-43bf-ab29-3c07d4694553",
+                  "createdAt": "2026-10-22T02:54:28.000Z",
+                  "updatedAt": "2026-10-22T02:54:28.000Z",
+                  "uid": "35240-972c9fd0-b06d-43bf-ab29-3c07d4694553"
                 }
               ],
-              "body": "[\n  {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"public\": true,\n    \"query_id\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"public\": false,\n    \"query_id\": \"string\"\n  }\n]",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "b04d9a28-e936-4a57-87d0-2dae652c2a9a",
+              "createdAt": "2026-10-22T02:54:28.000Z",
+              "updatedAt": "2026-10-22T02:54:28.000Z",
+              "uid": "35240-b04d9a28-e936-4a57-87d0-2dae652c2a9a"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "077ec5d2-0164-444e-8e91-c61733e71c5e",
+          "createdAt": "2026-10-22T02:54:28.000Z",
+          "updatedAt": "2026-10-22T02:54:28.000Z",
+          "uid": "35240-077ec5d2-0164-444e-8e91-c61733e71c5e"
         },
         {
-          "id": "3761fb18-acd8-4137-bef4-a31c3708d243",
-          "name": "Run Look",
+          "name": "Get All Looks",
+          "id": "3180f07c-a177-4cf6-b3f1-61e6dd56715d",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Run Look",
-            "description": {
-              "content": "Execute a saved Look and return its query results in the requested output format such as json, csv, or html.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "looks",
-                ":look_id",
-                "run",
-                ":result_format"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "look_id",
-                  "description": "(Required) Numeric identifier of the Look to execute."
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "result_format",
-                  "description": "(Required) Output format for the executed Look results."
-                }
-              ]
-            },
+            "method": "GET",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "GET",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/looks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "looks"
+              ]
+            },
+            "description": "Return a list of saved Looker Looks (saved query visualizations) that the authenticated user has permission to view."
           },
           "response": [
             {
-              "id": "e00996c0-03ea-4203-b296-cab98ab3f4a5",
-              "name": "Successful response containing the rendered Look results.",
+              "id": "46db9217-29dd-4115-bd48-bcbdc599ed96",
+              "name": "Successful response containing a list of saved Looks.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "looks",
-                    ":look_id",
-                    "run",
-                    ":result_format"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "look_id",
-                      "description": "(Required) Numeric identifier of the Look to execute."
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "result_format",
-                      "description": "(Required) Output format for the executed Look results."
-                    }
-                  ]
-                },
+                "method": "GET",
                 "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
                   }
                 ],
-                "method": "GET",
-                "body": {}
+                "url": {
+                  "raw": "{{baseUrl}}/looks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "looks"
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "[\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"public\": \"<boolean>\",\n    \"query_id\": \"<string>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"public\": \"<boolean>\",\n    \"query_id\": \"<string>\"\n  }\n]",
+              "createdAt": "2026-10-22T02:54:28.000Z",
+              "updatedAt": "2026-10-22T02:54:28.000Z",
+              "uid": "35240-46db9217-29dd-4115-bd48-bcbdc599ed96"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:54:28.000Z",
+          "updatedAt": "2026-10-22T02:54:28.000Z",
+          "uid": "35240-3180f07c-a177-4cf6-b3f1-61e6dd56715d"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://your-instance.cloud.looker.com:19999/api/4.0",
-      "key": "baseUrl"
+      "id": "f2755f99-624d-4b8d-b1b5-e691f709b7ba",
+      "createdAt": "2026-10-22T02:54:28.000Z",
+      "updatedAt": "2026-10-22T02:54:28.000Z",
+      "uid": "35240-f2755f99-624d-4b8d-b1b5-e691f709b7ba"
     }
   ],
   "auth": {
@@ -217,17 +226,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "fa76aca4-f27a-44d4-8678-1091f4728651",
-    "name": "Google Looker Authentication Looks API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "A simplified OpenAPI representation for Google Looker covering core Looker API 4.0 endpoints used to authenticate, fetch users, and run looks. This spec is a curated index entry pointing to the upstream Looker OpenAPI for full coverage.\n\nContact Support:\n Name: Google Looker",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://your-instance.cloud.looker.com:19999/api/4.0"
     }
-  }
+  ]
 }

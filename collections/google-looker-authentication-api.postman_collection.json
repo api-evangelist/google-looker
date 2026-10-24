@@ -1,123 +1,120 @@
 {
+  "info": {
+    "_postman_id": "6ecde584-2e9a-491e-8a02-93b6095e9254",
+    "name": "Google Looker Authentication API",
+    "description": "A simplified OpenAPI representation for Google Looker covering core Looker API 4.0 endpoints used to authenticate, fetch users, and run looks. This spec is a curated index entry pointing to the upstream Looker OpenAPI for full coverage.\n\nContact Support:\n Name: Google Looker",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:54:22.000Z",
+    "updatedAt": "2026-10-22T02:54:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6ecde584-2e9a-491e-8a02-93b6095e9254"
+  },
   "item": [
     {
-      "id": "f54ada03-f94f-4dfb-bfed-6dd43e552f40",
-      "name": "Authentication",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "login",
       "item": [
         {
-          "id": "84365ea8-33ce-493d-89e1-d1abfbf52935",
           "name": "Login",
+          "id": "7c15a180-ecdd-4182-a41c-52ce5d0033cd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Login",
-            "description": {
-              "content": "Exchange Looker API client_id and client_secret for an OAuth-style access token used to authorize subsequent API requests.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "login"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "client_id",
-                  "value": "<string>",
-                  "description": "(Required) Looker API client ID for the user account being authenticated."
-                },
-                {
-                  "disabled": false,
-                  "key": "client_secret",
-                  "value": "<string>",
-                  "description": "(Required) Looker API client secret paired with the client_id."
-                }
-              ],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
               {
                 "key": "Accept",
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null
+            "url": {
+              "raw": "{{baseUrl}}/login?client_id=<string>&client_secret=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "login"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Looker API client ID for the user account being authenticated.",
+                  "key": "client_id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Looker API client secret paired with the client_id.",
+                  "key": "client_secret",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Exchange Looker API client_id and client_secret for an OAuth-style access token used to authorize subsequent API requests."
           },
           "response": [
             {
-              "id": "16fe504b-3f36-41c7-96f9-cd51023df32c",
+              "id": "e31a22ed-f89e-4790-93bd-ff0d04a474c2",
               "name": "Successful login response containing the access token.",
               "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
                 "url": {
-                  "path": [
-                    "login"
-                  ],
+                  "raw": "{{baseUrl}}/login?client_id=<string>&client_secret=<string>",
                   "host": [
                     "{{baseUrl}}"
                   ],
+                  "path": [
+                    "login"
+                  ],
                   "query": [
                     {
+                      "description": "(Required) Looker API client ID for the user account being authenticated.",
                       "key": "client_id",
                       "value": "<string>"
                     },
                     {
+                      "description": "(Required) Looker API client secret paired with the client_id.",
                       "key": "client_secret",
                       "value": "<string>"
                     }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {}
+                  ]
+                }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"access_token\": \"string\",\n  \"token_type\": \"string\",\n  \"expires_in\": 4384\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"access_token\": \"<string>\",\n  \"token_type\": \"<string>\",\n  \"expires_in\": \"<integer>\"\n}",
+              "createdAt": "2026-10-22T02:54:22.000Z",
+              "updatedAt": "2026-10-22T02:54:22.000Z",
+              "uid": "35240-e31a22ed-f89e-4790-93bd-ff0d04a474c2"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:54:22.000Z",
+          "updatedAt": "2026-10-22T02:54:22.000Z",
+          "uid": "35240-7c15a180-ecdd-4182-a41c-52ce5d0033cd"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://your-instance.cloud.looker.com:19999/api/4.0",
-      "key": "baseUrl"
+      "id": "b9ed116a-a6ae-4365-989b-c1424a552fa7",
+      "createdAt": "2026-10-22T02:54:22.000Z",
+      "updatedAt": "2026-10-22T02:54:22.000Z",
+      "uid": "35240-b9ed116a-a6ae-4365-989b-c1424a552fa7"
     }
   ],
   "auth": {
@@ -125,17 +122,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "e47a6bc0-02ee-46d7-8c36-e65ced72c5f3",
-    "name": "Google Looker Authentication API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "A simplified OpenAPI representation for Google Looker covering core Looker API 4.0 endpoints used to authenticate, fetch users, and run looks. This spec is a curated index entry pointing to the upstream Looker OpenAPI for full coverage.\n\nContact Support:\n Name: Google Looker",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://your-instance.cloud.looker.com:19999/api/4.0"
     }
-  }
+  ]
 }
